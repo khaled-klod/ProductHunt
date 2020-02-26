@@ -1,10 +1,27 @@
 # ProductHunt
+This is a test project that displays products from Product Hunt API on a certain day (with DatePicker material and PieChart from chart.js module). 
+Frontend: Angular (version 9.0.2)
+Backend: NodeJS (version 12.13.1)
+API: https://api.producthunt.com/v2/docs
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.2.
+### Clone the repo
+
+```shell
+git clone https://github.com/kodeklaude/ProductHunt.git
+cd ProductHunt
+```
+### Install npm packages
+
+Install the `npm` packages described in the `package.json` and verify that it works:
+
+```shell
+npm install
+npm start
+```
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run `npm run serve` to run (concurrently) the express server and Angular's dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Code scaffolding
 
@@ -18,10 +35,4 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
