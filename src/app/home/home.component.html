@@ -1,0 +1,164 @@
+
+
+
+        
+
+<mat-grid-list cols="4" rowHeight="370px">
+        <mat-grid-tile colspan="2" rowspan="1">
+                    <mat-card id="date-picker">
+                        <mat-card-header>
+                            <mat-card-title>Choose Date</mat-card-title>
+                        </mat-card-header>
+                        
+                            <mat-card-content >
+                                    <mat-form-field>
+                                            <input #todo matInput [matDatepicker]="myDatepicker"  placeholder="Day">
+                                            <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+                                            <mat-datepicker #myDatepicker></mat-datepicker>
+                                            
+                                           
+                                    </mat-form-field>
+                            </mat-card-content>
+                            <mat-card-actions>
+                                    <button  mat-raised-button (click)="searchProducts(todo.value)"  color="primary">search Products</button>
+                            </mat-card-actions>
+                    </mat-card>
+        
+                        
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="2" rowspan="1"  >
+
+                <pie-chart *ngIf="my_data && !loading" [piedata]=my_data></pie-chart>
+                <mat-card  class="spinner-wrapper" *ngIf="!my_data || loading" >
+                                
+                        <mat-spinner color="accent" value="100" mode="indeterminate" style="margin:0 auto;">
+                            </mat-spinner>
+                
+                 </mat-card>
+                                   
+        </mat-grid-tile>
+
+       
+
+        <mat-grid-tile colspan="4" [rowspan]="row_nbr">
+                <mat-card  class="spinner-wrapper" *ngIf="!my_data || loading" >
+                                
+                        <mat-spinner color="accent" value="100" mode="indeterminate" style="margin:0 auto;">
+                            </mat-spinner>
+                
+                 </mat-card>
+            
+                <mat-card id="product-list" *ngIf="my_data && !loading">
+                        <mat-card-header>
+                                <mat-card-title *ngIf="!today" style="color:purple">Showing products on {{todo.value}}</mat-card-title>
+                                <mat-card-title *ngIf="today" style="color:purple">Showing Today's products</mat-card-title>
+                                
+                        </mat-card-header>
+                                   
+                                    <mat-list dense>
+                                            
+                                            <mat-list-item id="matlistitem" *ngFor="let p of obs | async">
+                                                    
+                                                    <img matListAvatar [src]="p.node.thumbnail.url | safe:'url'" alt="">
+                                                    <h3 matLine> <b>{{p.node.name}}</b> </h3>
+                                                    
+                                                    <span matLine class="demo-2"> {{p.node.description}}</span>
+                                                    <span matLine>Tagline: {{p.node.tagline}}</span>
+                                                    <p matLine>
+                                                            <a  href="{{p.node.website}}">website            </a>
+                                                            &nbsp;
+                                                            <span style="color:rgb(0, 60, 128)" ><b>Rating: {{p.node.reviewsRating}}      </b>    </span>
+                                                            &nbsp;
+                                                            <span style="color:rgb(0, 60, 128)" ><strong>Number of votes: {{p.node.votesCount}}   </strong></span>
+                
+                                                    </p>
+                                                    <p matLine>
+                                                            <span *ngIf="p.node.topics.edges[0]">#{{p.node.topics.edges[0].node.name}}</span>
+                                                            &nbsp;
+                                                            <span *ngIf="p.node.topics.edges[1]">#{{p.node.topics.edges[1].node.name}}    </span>
+                                                            &nbsp;
+                                                            <span *ngIf="p.node.topics.edges[2]">#{{p.node.topics.edges[2].node.name}}   </span>
+                                                            
+                
+                
+                                                    </p>
+                
+                                                    
+                                                    <mat-divider></mat-divider>
+                                                
+                                            </mat-list-item>
+                                    </mat-list>
+                
+                                          
+                    </mat-card>
+        </mat-grid-tile>
+
+        
+
+        
+
+        
+
+        
+        
+
+        
+      </mat-grid-list>
+
+      
+
+      <!-- <pie-chart *ngIf="my_data" [piedata]=my_data></pie-chart> -->
+           
+            
+            
+            
+
+    
+
+    <mat-paginator    [pageSizeOptions]="[5, 10, 25, 100]" (page)="getPage($event)"></mat-paginator>
+
+
+
+  <!-- <pie-chart [piedata]=my_data></pie-chart> -->
+
+
+    <!-- <div *ngIf="my_data">
+
+            <div class="ui items">
+                   
+                  
+                    <product-row
+                      *ngFor="let p of my_data"
+                      [product]="p.node"
+                      
+                      >
+                      
+                    </product-row>
+                  </div>
+            
+        </div> -->
+
+
+         <!-- <mat-list>
+                                        <mat-list-item *ngFor="let p of my_data">
+                                                        <product-row
+                                                        [product]="p.node"
+                                                        
+                                                        >
+                                                        
+                                                      </product-row>
+                                                </mat-list-item>
+                                        </mat-list> -->
+
+                                        <!-- <mat-card>
+                                                <mat-card-header>
+                                                    <mat-card-title>Stats</mat-card-title>
+                                                </mat-card-header>
+                                                
+                                                    <mat-card-content>
+                                                        
+                                                            
+                                                    </mat-card-content>
+                                                    
+                                        </mat-card> -->

@@ -1,0 +1,94 @@
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+#date-picker{
+    width: 70%; 
+    height: 50%; 
+    
+	background-color: #fff; 
+	margin: auto; 
+	margin-top: 3%; 
+	position: relative; 
+    padding: 60px;
+    
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+    border-bottom-left-radius: 2px;
+	box-shadow: rgba(0, 0, 0, 0.0980392) 4px 4px 4px 4px, rgba(0, 0, 0, 0.0980392) 0px 0px 3px;
+}
+
+#product-list{
+    margin-bottom: 5%;
+
+    width: 75%; 
+	background-color: #fff; 
+	margin: auto; 
+	margin-top: 5%; 
+	position: relative; 
+	padding: 50px;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+    border-bottom-left-radius: 2px;
+	box-shadow: rgba(0, 0, 0, 0.0980392) 4px 4px 4px 4px, rgba(0, 0, 0, 0.0980392) 0px 0px 3px;
+}
+
+/* .content-card	
+{
+	
+} */
+
+mat-card-content, mat-card-actions, mat-card-header {
+    
+    margin-left: 35%;
+}
+
+mat-list-item
+{
+	/* display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex; 
+	align-items: center; 
+	flex-wrap: wrap */
+}
+
+mat-list-item.thumbnail {
+    margin-right: 2em;
+    justify-content: flex-start;
+}
+
+.mat-list-avatar{
+    border-radius: 0% !important;
+    width: 80px !important;
+    height: 80px !important;
+}
+
+#matlistitem{
+    height: 160px !important;
+}
+
+/* #matlisttopics{
+    
+        padding: 0 !important;
+        
+          display: inline-block !important;
+          height: auto !important;
+          width: auto !important;
+        
+      }
+#topicitem{
+    flex: right !important;
+} */
+
+.demo-2{
+    word-wrap: break-word !important;
+    font-size: 1em;
+    font-weight: 400;
+    line-height: 1.5em;
+    color: #111;
+}
+
+.spinner-wrapper{
+    margin-top: 10%;
+    
+}

@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  public current_datetime  =  new  Date();
   title = 'product-hunt';
 }
