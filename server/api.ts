@@ -41,8 +41,7 @@ if(!process.env.ACCESS_TOKEN){
 
     
     process.env.ACCESS_TOKEN = res.body.access_token;
-    
-    console.log(process.env.ACCESS_TOKEN);
+
     
 
     
