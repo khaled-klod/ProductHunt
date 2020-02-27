@@ -31,7 +31,7 @@ export class HomeComponent implements OnInit {
 
   public current_datetime  =  new  Date().toISOString();
 
-  public my_data: Object;
+  public my_data: Array<any>;
   
   public loading: boolean = false;
  public today: boolean = true;
@@ -40,8 +40,8 @@ export class HomeComponent implements OnInit {
 
     this.changeDetectorRef.detectChanges();
     
-    //get token here
-    //this.localStorageService.clearStorage();
+    //Local storage to optimize initial loading
+    this.localStorageService.clearStorage();
     var local_data = this.localStorageService.getLocalStorage();
     if(local_data){
       console.log("ngONINIT from LOCAL"+local_data);
@@ -53,18 +53,30 @@ export class HomeComponent implements OnInit {
     }else{
       console.log("ngONINIT from API");
       var tomorrow = new Date();
+      var today = new Date();
+      
       tomorrow.setDate(new Date().getDate()+1);
-      var day_after = new Date().toISOString();
-      var day_before = tomorrow.toISOString();
+      var tomorrow_final = new Date(tomorrow).toLocaleString().split(',')[0];
+      var today_final = new Date(today).toLocaleString().split(',')[0];
+      
+      var day_after = new Date(today_final).toISOString();
+      var day_before = new Date(tomorrow_final).toISOString();
+      console.log('NG ON INIT searchProducts between: '+day_after, day_before); 
       this.hunterService.getData(day_after, day_before).subscribe( d => {
         this.loading = false;
         console.log(d);
         //console.log(JSON.stringify(data));
         //console.log(data.posts.edges);
-        this.dataSource = new MatTableDataSource<any>(d.data.posts.edges);
         console.log(this.dataSource)
         this.my_data = d.data.posts.edges;
+        this.my_data.sort(function(a,b){
+          // Turn your strings into dates, and then subtract them
+          // to get a value that is either negative, positive, or zero.
+          return b.createdAt - a.createdAt;
+        });
         this.localStorageService.storeOnLocalStorage(this.my_data);
+        this.dataSource = new MatTableDataSource<any>(this.my_data);
+        
         this.dataSource.paginator = this.paginator;
         this.obs = this.dataSource.connect();
       });
@@ -99,8 +111,12 @@ export class HomeComponent implements OnInit {
       console.log(d);
       
       this.my_data = d.data.posts.edges;
-      
-      this.dataSource = new MatTableDataSource<any>(d.data.posts.edges);
+      this.my_data.sort(function(a,b){
+        // Turn your strings into dates, and then subtract them
+        // to get a value that is either negative, positive, or zero.
+        return b.createdAt - a.createdAt;
+      });
+      this.dataSource = new MatTableDataSource<any>(this.my_data);
       this.dataSource.paginator = this.paginator;
       this.obs = this.dataSource.connect();
       this.loading = false;

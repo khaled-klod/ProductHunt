@@ -43,14 +43,7 @@ mat-card-content, mat-card-actions, mat-card-header {
     margin-left: 35%;
 }
 
-mat-list-item
-{
-	/* display: -ms-flexbox;
-	display: -webkit-flex;
-	display: flex; 
-	align-items: center; 
-	flex-wrap: wrap */
-}
+
 
 mat-list-item.thumbnail {
     margin-right: 2em;
