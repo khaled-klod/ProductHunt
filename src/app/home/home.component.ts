@@ -5,7 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 
 import { DomSanitizer } from '@angular/platform-browser';
-import { LocalstorageService } from '../localStorage.service';
+import { LocalstorageService } from '../localstorage.service';
 
 @Component({
   selector: 'app-home',
