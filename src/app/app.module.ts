@@ -11,7 +11,7 @@ import {MatCardModule} from '@angular/material/card';
 
 import {MatFormField} from '@angular/material/form-field';
 import {MatToolbarModule} from '@angular/material/toolbar';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatListModule} from '@angular/material/list';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
@@ -43,7 +43,7 @@ import {HeaderComponent} from './layout/header/header.component';
     BrowserModule,
     AppRoutingModule,
     MatDatepickerModule,
-    NoopAnimationsModule,
+    BrowserAnimationsModule,
     MatNativeDateModule,
     MatInputModule,
     MatButtonModule,
