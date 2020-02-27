@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Observable, throwError, of } from 'rxjs';
-
+import {environment} from '../environments/environment'
 import { catchError, retry, map } from 'rxjs/operators';
 
 
@@ -13,7 +13,7 @@ export class HunterService {
 
   constructor(private http: HttpClient) { }
 
-  uri = 'http://localhost:4201/api';
+  uri = environment.BACKEND_URL;
 
 
   private handleError(error: HttpErrorResponse) {
