@@ -27,9 +27,7 @@ export class HomeComponent implements OnInit {
    
 
   }
-  sidenavWidth = 4;
 
-  public current_datetime  =  new  Date().toISOString();
 
   public my_data: Array<any>;
   
@@ -39,42 +37,37 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
 
     this.changeDetectorRef.detectChanges();
+    var tomorrow = new Date();
+    var today = new Date();
     
+    tomorrow.setDate(new Date().getDate()+1);
+    var tomorrow_final = new Date(tomorrow).toLocaleString().split(',')[0];
+    var today_final = new Date(today).toLocaleString().split(',')[0];
+    
+    var day_after = new Date(today_final).toISOString();
+    var day_before = new Date(tomorrow_final).toISOString();
     //Local storage to optimize initial loading
-    this.localStorageService.clearStorage();
+    //this.localStorageService.clearStorage();
     var local_data = this.localStorageService.getLocalStorage();
-    if(local_data){
-      console.log("ngONINIT from LOCAL"+local_data);
+    if(local_data && local_data[0].day_before == day_before && local_data[0].day_after == day_after){
       this.my_data = local_data[0].title;
       this.dataSource = new MatTableDataSource<any>(local_data[0].title);
-        console.log(this.dataSource)
         this.dataSource.paginator = this.paginator;
         this.obs = this.dataSource.connect();
     }else{
       console.log("ngONINIT from API");
-      var tomorrow = new Date();
-      var today = new Date();
       
-      tomorrow.setDate(new Date().getDate()+1);
-      var tomorrow_final = new Date(tomorrow).toLocaleString().split(',')[0];
-      var today_final = new Date(today).toLocaleString().split(',')[0];
-      
-      var day_after = new Date(today_final).toISOString();
-      var day_before = new Date(tomorrow_final).toISOString();
       console.log('NG ON INIT searchProducts between: '+day_after, day_before); 
       this.hunterService.getData(day_after, day_before).subscribe( d => {
         this.loading = false;
-        console.log(d);
-        //console.log(JSON.stringify(data));
-        //console.log(data.posts.edges);
+       
         console.log(this.dataSource)
         this.my_data = d.data.posts.edges;
         this.my_data.sort(function(a,b){
-          // Turn your strings into dates, and then subtract them
-          // to get a value that is either negative, positive, or zero.
+          
           return b.createdAt - a.createdAt;
         });
-        this.localStorageService.storeOnLocalStorage(this.my_data);
+        this.localStorageService.storeOnLocalStorage(this.my_data, day_before, day_after);
         this.dataSource = new MatTableDataSource<any>(this.my_data);
         
         this.dataSource.paginator = this.paginator;
@@ -101,19 +94,15 @@ export class HomeComponent implements OnInit {
     var day_before = new Date(tomorrow_final).toISOString();
     
 
-    //this.formatted_date = date.replace("/","-");
     this.loading = true;
-    console.log('searchProducts between: '+day_after, day_before); 
     this.hunterService.getData(day_after, day_before).subscribe( d => {
-      //this.ref.detectChanges();
-      //this.ref.detectChanges();
       
-      console.log(d);
+      
+      
       
       this.my_data = d.data.posts.edges;
       this.my_data.sort(function(a,b){
-        // Turn your strings into dates, and then subtract them
-        // to get a value that is either negative, positive, or zero.
+     
         return b.createdAt - a.createdAt;
       });
       this.dataSource = new MatTableDataSource<any>(this.my_data);
@@ -124,7 +113,6 @@ export class HomeComponent implements OnInit {
       
       
     });
-    //console.log(this.data); 
     
 
   }
